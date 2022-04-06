@@ -54,4 +54,6 @@ app_server <- function(input, output, session) {
     mutate(gross_inv_per_cap = (gross_inv_chain * 1e6) / pop)
 
   filtered_df <- mod_categoryTrend_server("categoryTrend_1", chain_investment_per_cap)
+
+
 }
