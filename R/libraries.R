@@ -1,0 +1,8 @@
+library(tidyverse)
+library(shiny)
+library(DT)
+library(shinyWidgets)
+library(scales)
+library(plotly)
+library(shinycssloaders)
+library(shinyjs)
