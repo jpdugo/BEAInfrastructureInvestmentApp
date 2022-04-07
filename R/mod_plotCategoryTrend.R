@@ -11,10 +11,10 @@ mod_plotCategoryTrend_ui <- function(id) {
   ns <- NS(id)
   tagList(
     awesomeRadio(
-      inputId = ns("Id003"),
-      label = "Variable Type",
-      choices = c("Gross Investment", "Gross Investment Per capita"),
-      selected = "Gross Investment",
+      inputId = ns("choose_var"),
+      label = "Chioose y axis variable",
+      choices = c("gross_inv_chain", "gross_inv_per_cap"),
+      selected = "gross_inv_chain",
       status = "warning"
     ),
     uiOutput(ns("plts_ui"))
@@ -33,17 +33,18 @@ mod_plotCategoryTrend_server <- function(id, df) {
     # si hay multiples valores en meta_cat dentro del df, entonces se hace split para poder usar la
     # funcion plt_category()
     plt_gg <- reactive({
+      req(input$choose_var)
       group_split(df, meta_cat) %>%
-        map(~ plt_category(.))
+        map(~ ggplotly(plt_category_pop(., input$choose_var)))
     })
 
     output$plts_ui <- renderUI({
-      exec(tagList, !!!imap(plt_gg(), ~ plotOutput(ns(paste0("plt_", .y)))))
+      exec(tagList, !!!imap(plt_gg(), ~ plotlyOutput(ns(paste0("plt_", .y)))))
     })
 
     observeEvent(plt_gg(), {
       iwalk(plt_gg(), ~ {
-        output[[paste0("plt_", .y)]] <<- renderPlot({
+        output[[paste0("plt_", .y)]] <<- renderPlotly({
           .x
         })
       })
