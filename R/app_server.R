@@ -8,6 +8,9 @@ app_server <- function(input, output, session) {
   # Your application server logic
 
 
+  # FIRST TABS --------------------------------------------------------------
+
+
 
   data_by_groups <- chain_investment %>%
     group_split(group_num)
@@ -17,35 +20,29 @@ app_server <- function(input, output, session) {
 
 
   walk2(
-    c(
-      "total_inf",
-      "total_inf_sector",
-      "total_basic_inf_type",
-      "total_inf_basic_sector",
-      paste0("social", 1:5)
-    ),
-    data_by_groups[c(1:4, 15:19)], ~ {
-      output[[.x]] <<- renderPlot({
-        plt <- .y %>% plt_category()
+    .x = c("total_inf", "total_inf_sector", "total_basic_inf_type", "total_inf_basic_sector", paste0("social", 1:5)),
+    .y = data_by_groups[c(1:4, 15:19)],
+    ~ {
+      plt <- .y %>% plt_category()
 
-        # se guarda una version pero en plotly del grafico
+      observe({
         interactive_plots[[.x]] <- plt %>% ggplotly()
 
         # permite reproducir un plotly adentro de un modal cuando se hace click en el grafico.
         onclick(.x, expr = {
           showModal(plotly_modal())
-
           output$modal_plotly <- renderPlotly({
             interactive_plots[[.x]] %>%
               layout(showlegend = FALSE)
           })
         })
+      })
 
+      output[[.x]] <<- renderPlot({
         plt
       })
     }
   )
-
 
   observeEvent(input$close_mod, {
     removeModal()

@@ -25,7 +25,7 @@ plt_category_pop <- function(df, var_name) {
         geom_line(alpha = .8, size = .8) +
         theme_minimal() +
         theme(legend.position = "top") +
-        ylab("Gross investment (chained 2021 dollars) in millions of USD") +
+        ylab("Gross investment chained") +
         ggtitle(unique(.$meta_cat)) +
         # scale_y_continuous(labels = label_number(suffix = " K", scale = 1e-3)) +
         scale_x_continuous(breaks = seq(1947, 2017, 3)) +
