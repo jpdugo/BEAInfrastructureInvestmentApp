@@ -12,23 +12,29 @@
 mod_categoryTrend_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    fluidRow(
-      column(
-        width = 10, offset = 1,
-        tags$h3(""),
-        panel(
-          pickerGroupUI(
-            id = ns("categories"),
-            params = list(
-              category = list(inputId = "category", label = "Category:"),
-              meta_cat = list(inputId = "meta_cat", label = "Meta Category:"),
-              group_num = list(inputId = 'group_num', label = 'Group number:')
-            )
-          ),
-          status = "primary"
-        ),
-        actionButton('use_data', 'Use this data'),
-        DT::DTOutput(outputId = ns("table"))
+    tabsetPanel(
+      id = ns("explore_data_tabset"),
+      tabPanel(
+        title = "Explore Data",
+        fluidRow(
+          column(
+            width = 10, offset = 1,
+            tags$h3(""),
+            panel(
+              pickerGroupUI(
+                id = ns("categories"),
+                params = list(
+                  category = list(inputId = "category", label = "Category:"),
+                  meta_cat = list(inputId = "meta_cat", label = "Meta Category:"),
+                  group_num = list(inputId = "group_num", label = "Group number:")
+                )
+              ),
+              status = "primary"
+            ),
+            actionButton(ns("use_data"), "Use this data"),
+            DT::DTOutput(outputId = ns("table"))
+          )
+        )
       )
     )
   )
@@ -45,13 +51,27 @@ mod_categoryTrend_server <- function(id, df) {
       module = pickerGroupServer,
       id = "categories",
       data = df,
-      vars = c("category", "meta_cat", 'group_num')
+      vars = c("category", "meta_cat", "group_num")
     )
 
     output$table <- DT::renderDT(res_mod(), rownames = FALSE)
 
-    res_mod
+    observeEvent(input$use_data, {
 
+      # input$use_data lo estoy usando para que no se repitan los ids de los modulos.
+
+      insertTab(
+        inputId = "explore_data_tabset",
+        tab = tabPanel(
+          title = paste("Selected Data", input$use_data),
+          mod_plotCategoryTrend_ui(ns(paste0("plotCategoryTrend_1", input$use_data)))
+        ),
+        target = "Explore Data", position = "after",
+        select = TRUE, session = getDefaultReactiveDomain()
+      )
+
+      mod_plotCategoryTrend_server(paste0("plotCategoryTrend_1", input$use_data), isolate(res_mod()))
+    })
   })
 }
 

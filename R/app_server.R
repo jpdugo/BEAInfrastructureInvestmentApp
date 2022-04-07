@@ -53,7 +53,12 @@ app_server <- function(input, output, session) {
     right_join(us_population_1960_2017, by = "year") %>%
     mutate(gross_inv_per_cap = (gross_inv_chain * 1e6) / pop)
 
-  filtered_df <- mod_categoryTrend_server("categoryTrend_1", chain_investment_per_cap)
 
+  mod_categoryTrend_server("categoryTrend_1", chain_investment_per_cap)
 
+  # mod_plotCategoryTrend_server("plotCategoryTrend_1", filtered_df)
+
+  #tiene que ir adentro de una tab
+  # observeEvent(filtered_df(), )
+  # mod_plotCategoryTrend_ui("plotCategoryTrend_1")
 }

@@ -13,20 +13,21 @@ app_ui <- function(request) {
       theme = bs_theme(bootswatch = "minty"),
       h1("BEAInfrastructureInvestmentApp"),
       tabsetPanel(
-        id = 'main_nav_panel',
-        tabPanel('Total Infrastructure',
-                 fluidRow_two_plots('total_inf', 'total_inf_sector'),
-                ),
-        tabPanel('Basic',
-                 fluidRow_two_plots('total_basic_inf_type', 'total_inf_basic_sector')
-                ),
-        tabPanel('Social',
-                 exec(tagList, !!!map(paste0('social', 1:5), ~plotOutput(.x)))
-                ),
-        tabPanel('Digital'),
-        tabPanel('Explore Data', mod_categoryTrend_ui("categoryTrend_1"))
+        id = "main_nav_panel",
+        tabPanel(
+          "Total Infrastructure",
+          fluidRow_two_plots("total_inf", "total_inf_sector"),
+        ),
+        tabPanel(
+          "Basic",
+          fluidRow_two_plots("total_basic_inf_type", "total_inf_basic_sector")
+        ),
+        tabPanel(
+          "Social",
+          exec(tagList, !!!map(paste0("social", 1:5), ~ plotOutput(.x)))
+        ),
+        tabPanel("Explore Data", mod_categoryTrend_ui("categoryTrend_1"))
       )
-
     )
   )
 }
