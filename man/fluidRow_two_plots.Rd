@@ -2,16 +2,18 @@
 % Please edit documentation in R/fluidRow_two_plots.R
 \name{fluidRow_two_plots}
 \alias{fluidRow_two_plots}
-\title{Title}
+\title{Create a fluidRow with two plotOutputs}
 \usage{
 fluidRow_two_plots(name1, name2)
 }
 \arguments{
-\item{name2}{}
+\item{name1}{left plotOutput id}
+
+\item{name2}{right plotOutout id}
 }
 \value{
-
+fluidRow with two plots one near each other
 }
 \description{
-Title
+Create a fluidRow with two plotOutputs
 }
