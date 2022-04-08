@@ -1,7 +1,6 @@
 #' Plot trends grouped by category
 #'
 #' @param df dataframe containing bea variables
-
 plt_category <- function(df) {
   df %>%
     {
@@ -22,7 +21,7 @@ plt_category <- function(df) {
 #'
 #' @param df dataframe containing bea variables
 #' @param var_name either gross_inv_per_cap or gross_inv_chain
-
+#' @return ggplot object
 plt_category_pop <- function(df, var_name) {
   df %>%
     {

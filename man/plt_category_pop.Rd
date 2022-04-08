@@ -11,6 +11,9 @@ plt_category_pop(df, var_name)
 
 \item{var_name}{either gross_inv_per_cap or gross_inv_chain}
 }
+\value{
+ggplot object
+}
 \description{
 Plot trends grouped by category and choose the y axis variable.
 }
