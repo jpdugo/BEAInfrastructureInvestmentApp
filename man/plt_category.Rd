@@ -6,6 +6,9 @@
 \usage{
 plt_category(df)
 }
+\arguments{
+\item{df}{dataframe containing bea variables}
+}
 \description{
 Plot trends grouped by category
 }

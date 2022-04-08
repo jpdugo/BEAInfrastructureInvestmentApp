@@ -10,7 +10,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      theme = shinytheme("paper"),
+      theme = shinythemes::shinytheme("paper"),
       h1("BEAInfrastructureInvestmentApp"),
       tabsetPanel(
         id = "main_nav_panel",
