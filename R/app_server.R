@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import dplyr
 #' @import plotly
+#' @import shinyjs
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
