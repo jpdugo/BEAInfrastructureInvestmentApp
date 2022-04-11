@@ -9,6 +9,9 @@ plt_category(df)
 \arguments{
 \item{df}{dataframe containing bea variables}
 }
+\value{
+ggplot
+}
 \description{
 Plot trends grouped by category
 }

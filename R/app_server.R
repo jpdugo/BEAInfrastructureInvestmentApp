@@ -4,8 +4,8 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @import dplyr
-#' @import plotly
-#' @import shinyjs
+#'
+#' @importFrom purrr walk2
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
@@ -29,14 +29,13 @@ app_server <- function(input, output, session) {
       plt <- .y %>% plt_category()
 
       observe({
-        interactive_plots[[.x]] <- plt %>% ggplotly()
-
-        # permite reproducir un plotly adentro de un modal cuando se hace click en el grafico.
-        onclick(.x, expr = {
+        interactive_plots[[.x]] <- plt %>% plotly::ggplotly()
+        #permite reproducir un plotly adentro de un modal cuando se hace click en el grafico.
+        shinyjs::onclick(.x, expr = {
           showModal(plotly_modal())
-          output$modal_plotly <- renderPlotly({
+          output$modal_plotly <- plotly::renderPlotly({
             interactive_plots[[.x]] %>%
-              layout(showlegend = FALSE)
+              plotly::layout(showlegend = FALSE)
           })
         })
       })
@@ -45,7 +44,7 @@ app_server <- function(input, output, session) {
         plt
       })
     }
-  )
+  ) #end of walk2
 
   observeEvent(input$close_mod, {
     removeModal()

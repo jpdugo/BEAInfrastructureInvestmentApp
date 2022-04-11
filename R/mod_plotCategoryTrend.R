@@ -6,11 +6,11 @@
 #'
 #' @noRd
 #'
-#' @importFrom shiny NS tagList
+#' @import shiny
 mod_plotCategoryTrend_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    awesomeRadio(
+    shinyWidgets::awesomeRadio( # mejorar las opciones
       inputId = ns("choose_var"),
       label = "Chioose y axis variable",
       choices = c("gross_inv_chain", "gross_inv_per_cap"),
@@ -24,6 +24,8 @@ mod_plotCategoryTrend_ui <- function(id) {
 #' plotCategoryTrend Server Functions
 #'
 #' @noRd
+#' @import purrr
+#' @import shiny
 mod_plotCategoryTrend_server <- function(id, df) {
   # stopifnot(is.reactive(df))
 
@@ -34,17 +36,17 @@ mod_plotCategoryTrend_server <- function(id, df) {
     # funcion plt_category()
     plt_gg <- reactive({
       req(input$choose_var)
-      group_split(df, meta_cat) %>%
-        map(~ ggplotly(plt_category_pop(., input$choose_var)))
+      dplyr::group_split(df, meta_cat) %>%
+        map(~ plotly::ggplotly(plt_category_pop(., input$choose_var)))
     })
 
     output$plts_ui <- renderUI({
-      exec(tagList, !!!imap(plt_gg(), ~ plotlyOutput(ns(paste0("plt_", .y)))))
+      exec(tagList, !!!imap(plt_gg(), ~ plotly::plotlyOutput(ns(paste0("plt_", .y)))))
     })
 
     observeEvent(plt_gg(), {
       iwalk(plt_gg(), ~ {
-        output[[paste0("plt_", .y)]] <<- renderPlotly({
+        output[[paste0("plt_", .y)]] <<- plotly::renderPlotly({
           .x
         })
       })

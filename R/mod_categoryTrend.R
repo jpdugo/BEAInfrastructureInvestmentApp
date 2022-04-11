@@ -6,9 +6,9 @@
 #'
 #' @noRd
 #'
-#' @import shinyWidgets
+#' @return taglist
 #'
-#' @importFrom shiny NS tagList
+#' @import shiny
 mod_categoryTrend_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -20,8 +20,8 @@ mod_categoryTrend_ui <- function(id) {
           column(
             width = 10, offset = 1,
             tags$h3(""),
-            panel(
-              pickerGroupUI(
+            shinyWidgets::panel(
+              shinyWidgets::pickerGroupUI(
                 id = ns("categories"),
                 params = list(
                   category = list(inputId = "category", label = "Category:"),
@@ -48,7 +48,7 @@ mod_categoryTrend_server <- function(id, df) {
     ns <- session$ns
 
     res_mod <- callModule(
-      module = pickerGroupServer,
+      module = shinyWidgets::pickerGroupServer,
       id = "categories",
       data = df,
       vars = c("category", "meta_cat", "group_num")
