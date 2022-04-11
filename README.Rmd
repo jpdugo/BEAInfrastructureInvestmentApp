@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/jpdugo/BEAInfrastructureInvestmentApp/workflows/R-CMD-check/badge.svg)](https://github.com/jpdugo/BEAInfrastructureInvestmentApp/actions)
 <!-- badges: end -->
 
 The goal of BEAInfrastructureInvestmentApp is to explore BEA infrastructure investment datasets from tidytuesday.
