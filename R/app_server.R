@@ -6,6 +6,7 @@
 #' @import dplyr
 #'
 #' @importFrom purrr walk2
+#' @importFrom rlang .data
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
@@ -16,7 +17,7 @@ app_server <- function(input, output, session) {
 
 
   data_by_groups <- chain_investment %>%
-    group_split(group_num)
+    group_split(.data$group_num)
 
   # store interactive plots for a modalDialog
   interactive_plots <- reactiveValues()
@@ -55,11 +56,11 @@ app_server <- function(input, output, session) {
   ## population data from https://data.worldbank.org/indicator/SP.POP.TOTL?locations=US
 
   us_population_1960_2017 <- us_population_1960_2017 %>%
-    mutate(year = as.numeric(year))
+    mutate(year = as.numeric(.data$year))
 
   chain_investment_per_cap <- chain_investment %>%
     right_join(us_population_1960_2017, by = "year") %>%
-    mutate(gross_inv_per_cap = (gross_inv_chain * 1e6) / pop)
+    mutate(gross_inv_per_cap = (.data$gross_inv_chain * 1e6) / .data$pop)
 
 
   mod_categoryTrend_server("categoryTrend_1", chain_investment_per_cap)

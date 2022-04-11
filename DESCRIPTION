@@ -2,7 +2,7 @@ Package: BEAInfrastructureInvestmentApp
 Title: PKG_TITLE
 Version: 0.0.0.9000
 Authors@R: person('Juan', 'Dugo', email = 'juanpatriciodugo@gmail.com', role = c('cre', 'aut'))
-Description: This package is used to display different graphs from the bea infrastructure dataset
+Description: Display different graphs from the bea infrastructure dataset.
 License: MIT + file LICENSE
 Imports: 
     attempt,
@@ -16,6 +16,7 @@ Imports:
     htmltools,
     plotly,
     purrr,
+    rlang,
     scales,
     shiny (>= 1.7.1),
     shinycssloaders,

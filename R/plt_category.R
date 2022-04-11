@@ -2,12 +2,13 @@
 #'
 #' @param df dataframe containing bea variables
 #' @import ggplot2
+#' @importFrom rlang .data
 #' @return ggplot
 #'
 plt_category <- function(df) {
   df %>%
     {
-      ggplot(., aes(x = year, y = gross_inv_chain, color = category)) +
+      ggplot(., aes(x = .data$year, y = .data$gross_inv_chain, color = .data$category)) +
         geom_line(alpha = .8, size = 1.1) +
         theme_minimal() +
         theme(legend.position = "top") +
@@ -29,7 +30,7 @@ plt_category <- function(df) {
 plt_category_pop <- function(df, var_name) {
   df %>%
     {
-      ggplot(., aes(x = year, y = .data[[var_name]], color = category)) +
+      ggplot(., aes(x = .data$year, y = .data[[var_name]], color = .data$category)) +
         geom_line(alpha = .8, size = .8) +
         theme_minimal() +
         theme(legend.position = "top") +

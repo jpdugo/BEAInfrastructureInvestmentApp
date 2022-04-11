@@ -7,6 +7,7 @@
 #' @noRd
 #'
 #' @import shiny
+#' @importFrom rlang .data
 mod_plotCategoryTrend_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -36,7 +37,7 @@ mod_plotCategoryTrend_server <- function(id, df) {
     # funcion plt_category()
     plt_gg <- reactive({
       req(input$choose_var)
-      dplyr::group_split(df, meta_cat) %>%
+      dplyr::group_split(df, .data$meta_cat) %>%
         map(~ plotly::ggplotly(plt_category_pop(., input$choose_var)))
     })
 

@@ -2,7 +2,6 @@
 #'
 #' A modalDialog containing one plot and a button to close it.
 #'
-#' @return
 #' @import shiny
 #' @export
 #'

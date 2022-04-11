@@ -6,9 +6,6 @@
 \usage{
 plotly_modal()
 }
-\value{
-
-}
 \description{
 A modalDialog containing one plot and a button to close it.
 }
