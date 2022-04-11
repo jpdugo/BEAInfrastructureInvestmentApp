@@ -13,8 +13,8 @@ plotly_modal <- function() {
     ),
     title = "Interactive Plot",
     footer = tagList(
-      actionButton('close_mod', "Close")
+      actionButton("close_mod", "Close")
     ),
-    size = 'l'
+    size = "l"
   )
 }

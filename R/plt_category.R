@@ -38,6 +38,6 @@ plt_category_pop <- function(df, var_name) {
         # scale_y_continuous(labels = label_number(suffix = " K", scale = 1e-3)) +
         scale_x_continuous(breaks = seq(1947, 2017, 3)) +
         theme(axis.text.x = element_text(size = 8, angle = 45))
-        #scale_y_log10(labels = scales::label_number(suffix = " K", scale = 1e-3))
+      # scale_y_log10(labels = scales::label_number(suffix = " K", scale = 1e-3))
     }
 }

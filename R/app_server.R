@@ -30,7 +30,7 @@ app_server <- function(input, output, session) {
 
       observe({
         interactive_plots[[.x]] <- plt %>% plotly::ggplotly()
-        #permite reproducir un plotly adentro de un modal cuando se hace click en el grafico.
+        # permite reproducir un plotly adentro de un modal cuando se hace click en el grafico.
         shinyjs::onclick(.x, expr = {
           showModal(plotly_modal())
           output$modal_plotly <- plotly::renderPlotly({
@@ -44,7 +44,7 @@ app_server <- function(input, output, session) {
         plt
       })
     }
-  ) #end of walk2
+  ) # end of walk2
 
   observeEvent(input$close_mod, {
     removeModal()
